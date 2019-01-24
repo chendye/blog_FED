@@ -1,9 +1,9 @@
 # 开发和维护个人开源项目之npm发布
 
 ## 项目的引入
-开始编码之前，项目如何被引入使用也需要考虑清楚。个人觉得使用`npm`包的方式引入是最佳选择：项目完全没有bug的可能性非常小，引入的打包后的结果基本无法调试，只能提`issues`或者另开环境，流程十分麻烦也不方便`bug`回溯；让使用者能够直接使用源码进行调试（只需安装相关依赖包），就显得很酸爽了。
+开始编码之前，项目如何被引入使用也需要考虑清楚。个人觉得使用`npm`包的方式引入是最佳选择：项目完全没有bug的可能性非常小，引入的打包后的结果基本无法调试，只能提`issues`或者另开环境，流程十分麻烦也不方便`bug`回溯；让使用者能够直接使用源码进行调试，就显得很酸爽了。
 
-另外如果项目包含了很多的输出，实际应用可能只需要其中部分输出，引入全部的代码会带来冗余。怎么按需加载，下文`pakeage.json`配置中会讲到。
+另外如果项目包含了很多的输出，实际应用可能只需要其中部分输出，引入全部的代码会带来冗余（如：`Lodash`）。怎么按需引入，下文`pakeage.json`会讲到。
 
 此外`webpack`提供了`UMD(Universal Module Definition)`的配置：
 ```javascript
@@ -42,7 +42,6 @@ module.exports = {
 
 
 ### pagekage.json
-对pagekage.json中3个字段进行说明
 
 #### main
 模块的入口，例如：模块名字`foo`，`reuqire('foo')`，引入的文件路径（相对于当前包的根目录）由`main`字段定义，打包输出的结果为`dist/index.js`，配置即应该是：
@@ -62,12 +61,20 @@ module.exports = {
   }
 ```
 #### module（非标准字段）
-这里配置指向打包前的源码入口。
-`wepack`在构建项目的时候，如果发现了这个字段，会首先使用这个字段指向的文件。除了源码更好调试外，还有一个优点`Tree Shaking`优化。[聊聊 package.json 文件中的 module 字段](https://loveky.github.io/2018/02/26/tree-shaking-and-pkg.module/)
+该配置指向打包前的源码入口。
+`wepack`在构建项目的时候，如果发现了这个字段，会首先使用这个字段指向的文件。
+除了源码更好调试外，还有一个优点`Tree Shaking`优化即按需引入。[聊聊 package.json 文件中的 module 字段](https://loveky.github.io/2018/02/26/tree-shaking-and-pkg.module/)
+
+```
+{
+ "main":"src/index.js" //源文件目录为src
+}
+```
 
 其他字段详细介绍[点我看官方文档](https://docs.npmjs.com/files/package.json)
 [package.json 非官方字段集合](https://segmentfault.com/a/1190000016365409)
-## npm login
+
+## 其他
 如果`npm login`报错如下：
 ```
 npm ERR! code E409
