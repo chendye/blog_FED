@@ -74,7 +74,13 @@ module.exports = {
 其他字段详细介绍[点我看官方文档](https://docs.npmjs.com/files/package.json)
 [package.json 非官方字段集合](https://segmentfault.com/a/1190000016365409)
 
+### npmignore
+https://docs.npmjs.com/misc/developers
+
 ## 其他
+
+### 问题1
+
 如果`npm login`报错如下：
 ```
 npm ERR! code E409
@@ -88,6 +94,10 @@ npm ERR!     C:\Users\Louis\AppData\Roaming\npm-cache\_logs\2019-01-23T06_55_37_
 npm config set registry https://registry.npmjs.org/
 ```
 再进行`npm login`
+
+### 问题2
+
+https://docs.npmjs.com/about-scopes
 
 ## 总结
 本文对项目的引入方式作了总结，再加上[开发和维护个人开源项目之代码仓库管理](https://segmentfault.com/a/1190000017981241)，项目前期的周边设计基本完成了，接下来开始专注编码。
